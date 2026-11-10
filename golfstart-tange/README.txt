@@ -1,0 +1,1 @@
+GolfStart Tange Sø – demonstrationsversion. Åbn index.html i browser eller læg hele mappen på GitHub Pages. PWA-manifest er inkluderet. En fuld offline serviceworker og produktionstest er ikke implementeret. Alle billeder leveret af brugeren. Der er ingen backend og ingen persondataindsamling. Links og klubbens indhold skal godkendes før offentliggørelse.
