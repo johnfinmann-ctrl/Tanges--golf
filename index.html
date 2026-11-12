@@ -341,15 +341,17 @@ body{padding-bottom:calc(104px + env(safe-area-inset-bottom))}
 @media(prefers-reduced-motion:reduce){.global-golfball-rail .global-golfball,.global-golfball-rail .global-golfball-shadow{animation:none!important}}
 
 
-/* V14: klikbar velkomstvideo via HeyGen (ingen kortlivet videofil i appen) */
-.welcome-video-panel{width:min(460px,100%)}
-.welcome-video-frame{position:relative;background:#0f3023;aspect-ratio:9/16;max-height:55dvh;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.welcome-video-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
-.welcome-video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0f3023}
-.welcome-video-play{position:relative;z-index:1;background:#173e29f2;color:white;font-weight:800;border:1px solid #ddc27a;border-radius:99px;padding:12px 18px;box-shadow:0 8px 24px #0008}
-.welcome-video-fallback{display:block;font-size:13px;font-weight:750;color:#24684c;text-decoration:underline;margin:0 0 16px}
+/* V15: velkomstvideo som i eksempel 1 – indbygget i kortet uden HeyGen-link */
+.welcome-video-panel{width:min(580px,100%);background:#f8f6ef}
+.welcome-video-frame{position:relative;background:#0f3023;aspect-ratio:9/16;max-height:58dvh;overflow:hidden;display:flex;align-items:center;justify-content:center;border-radius:22px 22px 0 0}
+.welcome-video-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 34%}
+.welcome-video-frame video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0f3023;object-fit:cover}
+.welcome-video-play{position:relative;z-index:1;display:grid;place-items:center;width:84px;height:84px;border-radius:50%;border:0;background:#173e29d9;color:white;font-size:28px;box-shadow:0 8px 24px #0008}
 .welcome-video-panel .welcome-panel-body{padding:16px 20px 24px}
-.welcome-video-panel .welcome-panel-body h2{font-size:21px}
+.welcome-video-panel .welcome-panel-body h2{font-size:21px;margin-bottom:8px}
+.welcome-video-panel .welcome-panel-body p{margin:0 0 10px}
+.welcome-video-panel .welcome-panel-body .welcome-note{font-size:13px;color:#66786f}
+@media(max-width:600px){.welcome-video-panel{width:min(92vw,520px)}.welcome-video-frame{max-height:52dvh}}
 
 </style></head><body>
 <div aria-label="GolfStart Tange Sø – intro" class="curtain-intro" id="intro" role="dialog" aria-modal="true">
@@ -361,10 +363,9 @@ body{padding-bottom:calc(104px + env(safe-area-inset-bottom))}
 </div>
 <div id="welcomeDialog" class="welcome-dialog" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle" hidden>
  <div class="welcome-panel welcome-video-panel"><button class="welcome-close" type="button" onclick="closeWelcome()" aria-label="Luk velkomsten">×</button>
- <div class="welcome-video-frame" id="welcomeVideoFrame" data-video-id="ede0b74f055dc92e9c93a69c30b62448"><img class="welcome-video-poster" src="assets/velkomst-vaert.webp" alt="Velkomstdamen fra GolfStart Tange Sø"/><button type="button" class="welcome-video-play" onclick="playWelcomeVideo()" aria-label="Afspil velkomstvideo">Afspil velkomstvideo ▶</button></div>
+ <div class="welcome-video-frame" id="welcomeVideoFrame"><img class="welcome-video-poster" src="assets/velkomst-vaert.webp" alt="Velkomstdamen fra GolfStart Tange Sø"/><button type="button" class="welcome-video-play" onclick="playWelcomeVideo()" aria-label="Afspil velkomstvideo">▶</button></div>
  <div class="welcome-panel-body"><h2 id="welcomeTitle">Velkommen til GolfStart Tange Sø</h2><p>Hør vores velkomst til dig, der er ny i golf. Videoen har dansk tale og kvindestemme.</p>
- <p class="welcome-note">Videoen afspilles fra HeyGen og kræver internetforbindelse.</p>
- <a class="welcome-video-fallback" href="https://app.heygen.com/videos/ede0b74f055dc92e9c93a69c30b62448" target="_blank" rel="noopener noreferrer">Åbn videoen hos HeyGen ↗</a>
+ <p class="welcome-note">Videoen afspilles direkte i appen og kræver internetforbindelse.</p>
  <button type="button" class="btn" onclick="closeWelcome()">Gå til appen</button></div></div>
 </div>
 <header class="header"><div class="shell headerin"><a class="brand" href="#top"><img alt="Tange Sø Golfklub logo" src="assets/00.webp"/><span>GOLFSTART<br/><span style="font-size:12px;color:#587267">TANGE SØ</span></span></a><button aria-expanded="false" class="menu" id="menuToggle" onclick="toggleMenu()">Menu</button></div><nav aria-label="Hovedmenu" class="shell drawer" id="drawer"><button onclick="go('forloeb')">Begynderforløb</button><button onclick="go('bane')">På banen</button><button onclick="go('links')">Golfværktøjer</button><button onclick="go('faq')">FAQ</button><button onclick="go('kontakt')">Kontakt</button><button onclick="go('tilmelding')">Tilmelding</button><button onclick="replayIntro()">Afspil intro</button></nav></header>
@@ -425,19 +426,24 @@ function replayIntro(){
 function openWelcome(){document.getElementById('welcomeDialog').hidden=false;document.body.classList.add('modal-open');document.querySelector('.welcome-close')?.focus()}
 function playWelcomeVideo(){
  const frame=document.getElementById('welcomeVideoFrame');
- if(!frame || frame.querySelector('iframe')) return;
- const iframe=document.createElement('iframe');
- iframe.src='https://app.heygen.com/embeds/ede0b74f055dc92e9c93a69c30b62448';
- iframe.title='GolfStart Tange Sø – velkomstvideo';
- iframe.allow='autoplay; fullscreen; picture-in-picture';
- iframe.allowFullscreen=true;
- iframe.loading='eager';
- frame.replaceChildren(iframe);
+ if(!frame || frame.querySelector('video')) return;
+ const video=document.createElement('video');
+ video.src='https://files2.heygen.ai/aws_pacific/avatar_tmp/bc28ce79537f43a29fb6d773978ec637/ede0b74f055dc92e9c93a69c30b62448.mp4?Expires=1795088098&Signature=RZivPUpisFGKwsMDV1ucj8l515KI6kE-pPbJW9rxdDm8h3NZgo2wzePAEz4dxVDbnOrZ4lUVwSoDb565bvaB4gS0d0D~8d25zDLeaXkQW9IYp1DfBoE1n6Zx3gkgms2yoeWt0xceuym1bufvms0K~ZpZY2TflN5miyjwLCwSOQ-FmO~Vh8oDKtm-21plp7-9gyv8Mo9Tcdxl0ZYpjtog7vBIl4qDcmo1h0bxaxJ6rId~FF6C62cZATP-igDWLIwcQN~5jfQrnBl2q2U8cH-6p3BF~D5Hv1q9DFpuntw6AptlUYU1AwLYbirCTQKCrS4hyOMlKnucM3VTutxE~xEfRw__&Key-Pair-Id=K38HBHX5LX3X2H';
+ video.poster='assets/velkomst-vaert.webp';
+ video.controls=true;
+ video.playsInline=true;
+ video.autoplay=true;
+ video.preload='metadata';
+ frame.replaceChildren(video);
+ const playPromise=video.play();
+ if(playPromise && typeof playPromise.catch==='function'){playPromise.catch(()=>{});}
 }
 function closeWelcome(){
  document.getElementById('welcomeDialog').hidden=true;document.body.classList.remove('modal-open');
  const frame=document.getElementById('welcomeVideoFrame');
- if(frame){frame.replaceChildren();frame.innerHTML='<img class="welcome-video-poster" src="assets/velkomst-vaert.webp" alt="Velkomstdamen fra GolfStart Tange Sø"/><button type="button" class="welcome-video-play" onclick="playWelcomeVideo()" aria-label="Afspil velkomstvideo">Afspil velkomstvideo ▶</button>';}
+ const existingVideo=frame?.querySelector('video');
+ if(existingVideo){existingVideo.pause();existingVideo.removeAttribute('src');existingVideo.load();}
+ if(frame){frame.replaceChildren();frame.innerHTML='<img class="welcome-video-poster" src="assets/velkomst-vaert.webp" alt="Velkomstdamen fra GolfStart Tange Sø"/><button type="button" class="welcome-video-play" onclick="playWelcomeVideo()" aria-label="Afspil velkomstvideo">▶</button>';}
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeWelcome();finishIntro()}});
 
