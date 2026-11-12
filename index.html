@@ -199,10 +199,64 @@ body{padding-bottom:calc(104px + env(safe-area-inset-bottom))}
 }
 @media(prefers-reduced-motion:reduce){.v8-intro-art{animation:none!important}}
 
+
+/* V10 – new intro in Lyngbygaard spirit, Tange identity */
+.curtain-intro{position:fixed;inset:0;z-index:100;overflow:hidden;background:#123928;color:white;transition:opacity .6s ease,visibility .6s ease}
+.curtain-intro.finished{opacity:0;visibility:hidden;pointer-events:none}
+.curtain-scene,.curtain-shade{position:absolute;inset:0}
+.curtain-scene img{width:100%;height:100%;object-fit:cover;object-position:54% 50%;animation:curtainKen 10s ease-out both}
+.curtain-shade{background:linear-gradient(0deg,#092c20d5 0%,#0b332273 40%,#0a2b1835 75%)}
+.curtain-copy{position:absolute;z-index:2;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;gap:9px;padding:24px;opacity:0;animation:curtainCopy 4.8s ease-out forwards}
+.curtain-copy img{width:100px;height:100px;object-fit:contain;background:#fff;border-radius:50%;padding:7px;box-shadow:0 10px 25px #0005}
+.curtain-kicker{font-size:11px;letter-spacing:.24em;color:#e3d19e;font-weight:800}
+.curtain-copy h1{font-size:clamp(30px,6vw,55px);margin:0;line-height:1.08;text-shadow:0 4px 17px #0009}
+.curtain-copy p{margin:0;color:#f5eed5;letter-spacing:.05em}
+.curtain-fabric{position:absolute;z-index:4;inset:0;display:grid;place-items:center;background:linear-gradient(105deg,#082c1b,#184936 62%,#123321);box-shadow:-15px 0 30px #0008;animation:pullCurtain 4.8s cubic-bezier(.45,.04,.23,1) forwards}
+.curtain-fabric:after{content:'';position:absolute;top:0;bottom:0;left:-4px;width:11px;background:linear-gradient(90deg,#b89844,#e1c471,#a47f28)}
+.fabric-title{text-align:center;font-size:clamp(28px,8vw,54px);letter-spacing:.14em;font-weight:900;line-height:1.45;color:#f6f0de}
+.fabric-title em{font-style:normal;color:#d4b65d;font-size:.56em;letter-spacing:.27em}
+.curtain-ball{position:absolute;z-index:5;left:0;top:50%;width:clamp(43px,6vw,65px);height:clamp(43px,6vw,65px);margin-top:-26px;border-radius:50%;border:1px solid #e3e4dd;background:radial-gradient(circle at 30% 25%,#fff 0%,#f8f8f4 50%,#ccd3cb 100%);box-shadow:0 7px 20px #0007;display:grid;place-items:center;animation:curtainRoll 4.8s cubic-bezier(.45,.04,.23,1) forwards}
+.curtain-ball span{font-size:5px;line-height:1.15;letter-spacing:.14px;font-weight:900;color:#145439;text-align:center}
+.curtain-skip{position:absolute;z-index:8;right:max(14px,env(safe-area-inset-right));top:max(18px,env(safe-area-inset-top));background:#113f30ee;color:#fff;border:1px solid #c8ab60;border-radius:999px;padding:10px 14px;font-size:13px}
+@keyframes pullCurtain{0%,10%{transform:translateX(0)}87%,100%{transform:translateX(105%)}}
+@keyframes curtainRoll{0%,10%{transform:translateX(-100%) rotate(0deg);opacity:1}87%{transform:translateX(calc(100vw - 10px)) rotate(1020deg);opacity:1}100%{transform:translateX(calc(100vw + 75px)) rotate(1090deg);opacity:0}}
+@keyframes curtainCopy{0%,35%{opacity:0;transform:translateY(12px)}65%,100%{opacity:1;transform:translateY(0)}}
+@keyframes curtainKen{from{transform:scale(1.06)}to{transform:scale(1)}}
+.welcome-trigger{display:inline-flex;align-items:center;gap:11px;margin:14px 0 0 12px;background:#153b2bdc;border:1px solid #d6bd76;border-radius:999px;color:#fff;padding:5px 12px 5px 5px;vertical-align:middle;box-shadow:0 8px 25px #0004;cursor:pointer;text-align:left}
+.welcome-trigger img{width:49px;height:49px;border-radius:50%;object-fit:cover;object-position:50% 20%;border:2px solid #edd8a4}
+.welcome-trigger strong{display:block;font-size:12px;letter-spacing:.09em;color:#fff}
+.welcome-trigger small{display:block;font-size:11px;color:#eddfbd}
+.welcome-play{font-size:12px;color:#e1c572;padding:0 3px}
+.welcome-dialog[hidden]{display:none!important}
+.welcome-dialog{position:fixed;inset:0;background:#071a13bd;z-index:120;display:grid;place-items:center;padding:20px;overflow:auto}
+.modal-open{overflow:hidden}
+.welcome-panel{position:relative;width:min(420px,100%);max-height:90dvh;background:#faf8f0;border-radius:20px;overflow:auto;box-shadow:0 24px 70px #0008}
+.welcome-panel>img{width:100%;height:min(52dvh,520px);object-fit:cover;object-position:center 44%;display:block}
+.welcome-panel-body{padding:19px 22px 23px}
+.welcome-panel-body h2{margin:0 0 8px;font-size:23px;line-height:1.15;color:#18432e}
+.welcome-panel-body p{font-size:14px;margin:0 0 12px;color:#405b4b}
+.welcome-panel-body .welcome-note{font-size:12px;color:#66786b}
+.welcome-close{position:absolute;right:12px;top:12px;width:42px;height:42px;border:1px solid #ddc88c;border-radius:50%;color:#fff;background:#143d2fed;font-size:29px;line-height:1}
+@media(max-width:600px){.hero-body .welcome-trigger{display:flex;width:max-content;margin:11px 0 0}.hero{min-height:380px}}
+@media(prefers-reduced-motion:reduce){.curtain-fabric,.curtain-ball,.curtain-copy,.curtain-scene img{animation:none!important}.curtain-fabric{display:none}.curtain-copy{opacity:1}}
 </style></head><body>
-<div aria-label="Velkommen til GolfStart Tange Sø" class="overlay v8-intro" id="intro" role="dialog" aria-modal="true"><div class="v8-intro-stage"><img alt="Velkommen til Tange Sø Golfklub. Find alt, du har brug for, og kom godt i gang med golf." class="v8-intro-art" src="assets/intro-v8.webp"/><button class="v8-intro-start" onclick="closeIntro()" aria-label="Kom i gang med GolfStart Tange Sø"><span class="sr-only">Kom i gang</span></button></div><button class="v8-intro-skip" onclick="closeIntro()" aria-label="Spring velkomsten over">Spring over <span aria-hidden="true">×</span></button></div>
-<header class="header"><div class="shell headerin"><a class="brand" href="#top"><img alt="Tange Sø Golfklub logo" src="assets/00.webp"/><span>GOLFSTART<br/><span style="font-size:12px;color:#587267">TANGE SØ</span></span></a><button aria-expanded="false" class="menu" id="menuToggle" onclick="toggleMenu()">Menu</button></div><nav aria-label="Hovedmenu" class="shell drawer" id="drawer"><button onclick="go('forloeb')">Begynderforløb</button><button onclick="go('bane')">På banen</button><button onclick="go('links')">Golfværktøjer</button><button onclick="go('faq')">FAQ</button><button onclick="go('kontakt')">Kontakt</button><button onclick="go('tilmelding')">Tilmelding</button><button onclick="closeIntro(); document.getElementById('intro').classList.remove('hide')">Afspil intro</button></nav></header>
-<main class="shell" id="top"><div class="hero home-only"><img alt="Golfbane med søer og green ved Tange Sø" src="assets/09.webp"/><div class="hero-body"><div class="eyebrow">TANGE SØ GOLFKLUB · BEGYNDERUNIVERS</div><h1>Golf begynder her.</h1><p>Oplev golf, natur og fællesskab ved Tange Sø.</p><a class="btn light" href="#tilmelding">Kom godt i gang →</a></div></div>
+<div aria-label="GolfStart Tange Sø – intro" class="curtain-intro" id="intro" role="dialog" aria-modal="true">
+  <div class="curtain-scene" aria-hidden="true"><img src="assets/09.webp" alt=""/><div class="curtain-shade"></div></div>
+  <div class="curtain-copy" aria-hidden="true"><img src="assets/00.webp" alt=""/><div class="curtain-kicker">TANGE SØ GOLFKLUB</div><h1>GolfStart Tange Sø</h1><p>Natur · Fællesskab · Golf</p></div>
+  <div class="curtain-fabric" aria-hidden="true"><span class="fabric-title">GOLFSTART<br/><em>TANGE SØ</em></span></div>
+  <div class="curtain-ball" aria-hidden="true"><span>TANGE SØ<br/>GOLF</span></div>
+  <button class="curtain-skip" onclick="finishIntro()">Spring intro over</button>
+</div>
+<div id="welcomeDialog" class="welcome-dialog" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle" hidden>
+ <div class="welcome-panel"><button class="welcome-close" type="button" onclick="closeWelcome()" aria-label="Luk velkomsten">×</button>
+ <img src="assets/intro-v8.webp" alt="Velkomstværten i Tange Sø Golfklub"/>
+ <div class="welcome-panel-body"><h2 id="welcomeTitle">Velkommen til GolfStart Tange Sø</h2>
+ <p>Er du ny i golf? Vi hjælper dig fra de første slag til du føler dig tryg på banen og i klubben.</p>
+ <p class="welcome-note">Velkomstvideoen med dansk tale bliver tilføjet, når den er produceret. Indtil da viser vi den valgte velkomstvært.</p>
+ <button type="button" class="btn" onclick="closeWelcome()">Gå til appen</button></div></div>
+</div>
+<header class="header"><div class="shell headerin"><a class="brand" href="#top"><img alt="Tange Sø Golfklub logo" src="assets/00.webp"/><span>GOLFSTART<br/><span style="font-size:12px;color:#587267">TANGE SØ</span></span></a><button aria-expanded="false" class="menu" id="menuToggle" onclick="toggleMenu()">Menu</button></div><nav aria-label="Hovedmenu" class="shell drawer" id="drawer"><button onclick="go('forloeb')">Begynderforløb</button><button onclick="go('bane')">På banen</button><button onclick="go('links')">Golfværktøjer</button><button onclick="go('faq')">FAQ</button><button onclick="go('kontakt')">Kontakt</button><button onclick="go('tilmelding')">Tilmelding</button><button onclick="replayIntro()">Afspil intro</button></nav></header>
+<main class="shell" id="top"><div class="hero home-only"><img alt="Golfbane med søer og green ved Tange Sø" src="assets/09.webp"/><div class="hero-body"><div class="eyebrow">TANGE SØ GOLFKLUB · BEGYNDERUNIVERS</div><h1>Golf begynder her.</h1><p>Oplev golf, natur og fællesskab ved Tange Sø.</p><a class="btn light" href="#tilmelding">Kom godt i gang →</a><button class="welcome-trigger" type="button" onclick="openWelcome()"><img src="assets/velkomst-vaert.webp" alt=""/><span><strong>VELKOMST</strong><small>Mød din golfvært</small></span><span class="welcome-play" aria-hidden="true">▶</span></button></div></div>
 <div aria-label="Vigtig begynderinformation" class="ticker home-only"><span class="tickerlabel">GODT AT VIDE</span><div class="tickertrack"><div class="tickermove"> Prøvemedlemskab fra 895 kr.   •    Træning, teori og banespil   •    Tange Søvej 68, Rødkærsbro   •    Lær at spille på TIKMA COURSE   •    Spørg sekretariatet: 86 65 94 20   •  </div></div></div><section class="app-page" id="oversigt"><a class="page-back" href="#top">← Til forsiden</a><div class="section-label">FIND DET, DU SØGER</div><h2>Oversigt</h2><p>Alt det praktiske – samlet ét sted.</p><div class="overview-cards">
 <a class="overview-card" href="#kontakt"><img alt="Klubhuset" src="assets/03.webp"/><strong>Kontakt</strong><span>›</span></a>
 <a class="overview-card warm" href="#links"><img alt="Golfbanen" src="assets/09.webp"/><strong>Links</strong><span>›</span></a>
@@ -243,10 +297,26 @@ body{padding-bottom:calc(104px + env(safe-area-inset-bottom))}
 <section class="app-page" id="naeste"><a class="page-back" href="#top">← Til forsiden</a><h2>Og når du har fået golfkørekortet?</h2><div class="card"><img alt="Luftfoto af golfklubbens bane og klubhus" src="assets/07.webp"/><div class="cardin"><h3>Golf er også fællesskab</h3><p>Nu starter golfrejsen for alvor. Lær GolfBox og Mit Golf at kende, find nye spillemakkere og deltag i klubbens aktiviteter.</p><a class="btn" href="https://tangegolf.dk/medlemskaber/" rel="noopener" target="_blank">Se medlemsmuligheder ↗</a></div></div></section></main>
 <footer class="footer"><div><strong>GOLFSTART TANGE SØ</strong><span> · Din vej ind i golfen</span></div><a href="https://tangegolf.dk/" rel="noopener" target="_blank">Besøg Tange Sø Golfklub ↗</a></footer><div class="global-golfball-rail" aria-hidden="true"><div class="grass-base"></div><div class="grass-cut"></div><div class="grass-fairway"></div><div class="rail-hole"></div><div class="hole-pulse"></div><div class="rail-flag"><div class="rail-flag-stick"></div><img alt="" class="rail-flag-logo" src="assets/00.webp"/></div><div class="global-golfball-shadow"></div><div class="global-golfball"><span class="dimples"></span><span class="ball-mark">Tange Sø<br/>Golf</span></div></div><nav aria-label="Genveje" class="bottomnav"><a href="#top"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="m3 10 9-7 9 7v10H3z"></path><path d="M9 20v-7h6v7"></path></svg><span>Velkommen</span></a><a href="#forloeb"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="6" cy="18" r="2"></circle><circle cx="18" cy="6" r="2"></circle><path d="M8 18h5a5 5 0 0 0 0-10h-2"></path></svg><span>Forløbet</span></a><a href="#oversigt"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><rect height="7" rx="1" width="7" x="3" y="3"></rect><rect height="7" rx="1" width="7" x="14" y="3"></rect><rect height="7" rx="1" width="7" x="3" y="14"></rect><rect height="7" rx="1" width="7" x="14" y="14"></rect></svg><span>Oversigt</span></a><a href="#faq"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4"></path><path d="M12 17h.01"></path></svg><span>FAQ</span></a><a href="#tilmelding"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="10" cy="8" r="3"></circle><path d="M3 20v-2a7 7 0 0 1 14 0v2"></path><path d="M18 8v6m-3-3h6"></path></svg><span>Tilmeld</span></a></nav>
 <script>
-function closeIntro(){document.getElementById('intro').classList.add('hide');sessionStorage.setItem('tange_intro_seen','1')}
+let introFinishTimer;
+function finishIntro(){
+ clearTimeout(introFinishTimer);
+ const intro=document.getElementById('intro');intro.classList.add('finished');
+ intro.setAttribute('aria-hidden','true');sessionStorage.setItem('tange_intro_seen','1');
+}
+function closeIntro(){finishIntro()}
+function replayIntro(){
+ closeWelcome();const intro=document.getElementById('intro');intro.classList.remove('finished','playing');
+ intro.removeAttribute('aria-hidden');void intro.offsetWidth;intro.classList.add('playing');
+ clearTimeout(introFinishTimer);
+ introFinishTimer=setTimeout(finishIntro,5200);
+}
+function openWelcome(){document.getElementById('welcomeDialog').hidden=false;document.body.classList.add('modal-open');document.querySelector('.welcome-close')?.focus()}
+function closeWelcome(){document.getElementById('welcomeDialog').hidden=true;document.body.classList.remove('modal-open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeWelcome();finishIntro()}});
+
 function toggleMenu(){let n=document.getElementById('drawer'),b=document.getElementById('menuToggle');n.classList.toggle('open');b.setAttribute('aria-expanded',n.classList.contains('open'))}
 function go(id){document.getElementById('drawer').classList.remove('open');document.getElementById('menuToggle').setAttribute('aria-expanded','false');document.getElementById(id)?.scrollIntoView({behavior:'smooth'})}
-if(sessionStorage.getItem('tange_intro_seen'))closeIntro();
+if(sessionStorage.getItem('tange_intro_seen') || window.matchMedia('(prefers-reduced-motion: reduce)').matches){finishIntro()}else{replayIntro()}
 const tasks=['Jeg har været til introduktion','Jeg har trænet grundslagene','Jeg har deltaget i teori og regler','Jeg har spillet på banen','Jeg har gennemført de krævede begynderaktiviteter'];const p=document.getElementById('progress');tasks.forEach((t,i)=>{const label=document.createElement('label');label.className='checkrow';const c=document.createElement('input');c.type='checkbox';c.checked=localStorage.getItem('tange_step_'+i)==='1';c.addEventListener('change',()=>{localStorage.setItem('tange_step_'+i,c.checked?'1':'0');updateProgress()});label.append(c,document.createTextNode(t));p.append(label)});function updateProgress(){document.getElementById('progressText').textContent=[...p.querySelectorAll('input')].filter(x=>x.checked).length+' af '+tasks.length+' trin afkrydset'}updateProgress();
 
 // En side ad gangen: undgå en endeløs forside.
