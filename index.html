@@ -340,6 +340,17 @@ body{padding-bottom:calc(104px + env(safe-area-inset-bottom))}
 }
 @media(prefers-reduced-motion:reduce){.global-golfball-rail .global-golfball,.global-golfball-rail .global-golfball-shadow{animation:none!important}}
 
+
+/* V14: klikbar velkomstvideo via HeyGen (ingen kortlivet videofil i appen) */
+.welcome-video-panel{width:min(460px,100%)}
+.welcome-video-frame{position:relative;background:#0f3023;aspect-ratio:9/16;max-height:55dvh;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.welcome-video-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.welcome-video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0f3023}
+.welcome-video-play{position:relative;z-index:1;background:#173e29f2;color:white;font-weight:800;border:1px solid #ddc27a;border-radius:99px;padding:12px 18px;box-shadow:0 8px 24px #0008}
+.welcome-video-fallback{display:block;font-size:13px;font-weight:750;color:#24684c;text-decoration:underline;margin:0 0 16px}
+.welcome-video-panel .welcome-panel-body{padding:16px 20px 24px}
+.welcome-video-panel .welcome-panel-body h2{font-size:21px}
+
 </style></head><body>
 <div aria-label="GolfStart Tange Sø – intro" class="curtain-intro" id="intro" role="dialog" aria-modal="true">
   <div class="curtain-scene" aria-hidden="true"><img src="assets/09.webp" alt=""/><div class="curtain-shade"></div></div>
@@ -349,11 +360,11 @@ body{padding-bottom:calc(104px + env(safe-area-inset-bottom))}
   <button class="curtain-skip" onclick="finishIntro()">Spring intro over</button>
 </div>
 <div id="welcomeDialog" class="welcome-dialog" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle" hidden>
- <div class="welcome-panel"><button class="welcome-close" type="button" onclick="closeWelcome()" aria-label="Luk velkomsten">×</button>
- <img src="assets/intro-v8.webp" alt="Velkomstværten i Tange Sø Golfklub"/>
- <div class="welcome-panel-body"><h2 id="welcomeTitle">Velkommen til GolfStart Tange Sø</h2>
- <p>Er du ny i golf? Vi hjælper dig fra de første slag til du føler dig tryg på banen og i klubben.</p>
- <p class="welcome-note">Velkomstvideoen med dansk tale bliver tilføjet, når den er produceret. Indtil da viser vi den valgte velkomstvært.</p>
+ <div class="welcome-panel welcome-video-panel"><button class="welcome-close" type="button" onclick="closeWelcome()" aria-label="Luk velkomsten">×</button>
+ <div class="welcome-video-frame" id="welcomeVideoFrame" data-video-id="ede0b74f055dc92e9c93a69c30b62448"><img class="welcome-video-poster" src="assets/velkomst-vaert.webp" alt="Velkomstdamen fra GolfStart Tange Sø"/><button type="button" class="welcome-video-play" onclick="playWelcomeVideo()" aria-label="Afspil velkomstvideo">Afspil velkomstvideo ▶</button></div>
+ <div class="welcome-panel-body"><h2 id="welcomeTitle">Velkommen til GolfStart Tange Sø</h2><p>Hør vores velkomst til dig, der er ny i golf. Videoen har dansk tale og kvindestemme.</p>
+ <p class="welcome-note">Videoen afspilles fra HeyGen og kræver internetforbindelse.</p>
+ <a class="welcome-video-fallback" href="https://app.heygen.com/videos/ede0b74f055dc92e9c93a69c30b62448" target="_blank" rel="noopener noreferrer">Åbn videoen hos HeyGen ↗</a>
  <button type="button" class="btn" onclick="closeWelcome()">Gå til appen</button></div></div>
 </div>
 <header class="header"><div class="shell headerin"><a class="brand" href="#top"><img alt="Tange Sø Golfklub logo" src="assets/00.webp"/><span>GOLFSTART<br/><span style="font-size:12px;color:#587267">TANGE SØ</span></span></a><button aria-expanded="false" class="menu" id="menuToggle" onclick="toggleMenu()">Menu</button></div><nav aria-label="Hovedmenu" class="shell drawer" id="drawer"><button onclick="go('forloeb')">Begynderforløb</button><button onclick="go('bane')">På banen</button><button onclick="go('links')">Golfværktøjer</button><button onclick="go('faq')">FAQ</button><button onclick="go('kontakt')">Kontakt</button><button onclick="go('tilmelding')">Tilmelding</button><button onclick="replayIntro()">Afspil intro</button></nav></header>
@@ -412,7 +423,22 @@ function replayIntro(){
  introFinishTimer=setTimeout(finishIntro,5200);
 }
 function openWelcome(){document.getElementById('welcomeDialog').hidden=false;document.body.classList.add('modal-open');document.querySelector('.welcome-close')?.focus()}
-function closeWelcome(){document.getElementById('welcomeDialog').hidden=true;document.body.classList.remove('modal-open')}
+function playWelcomeVideo(){
+ const frame=document.getElementById('welcomeVideoFrame');
+ if(!frame || frame.querySelector('iframe')) return;
+ const iframe=document.createElement('iframe');
+ iframe.src='https://app.heygen.com/embeds/ede0b74f055dc92e9c93a69c30b62448';
+ iframe.title='GolfStart Tange Sø – velkomstvideo';
+ iframe.allow='autoplay; fullscreen; picture-in-picture';
+ iframe.allowFullscreen=true;
+ iframe.loading='eager';
+ frame.replaceChildren(iframe);
+}
+function closeWelcome(){
+ document.getElementById('welcomeDialog').hidden=true;document.body.classList.remove('modal-open');
+ const frame=document.getElementById('welcomeVideoFrame');
+ if(frame){frame.replaceChildren();frame.innerHTML='<img class="welcome-video-poster" src="assets/velkomst-vaert.webp" alt="Velkomstdamen fra GolfStart Tange Sø"/><button type="button" class="welcome-video-play" onclick="playWelcomeVideo()" aria-label="Afspil velkomstvideo">Afspil velkomstvideo ▶</button>';}
+}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeWelcome();finishIntro()}});
 
 function toggleMenu(){let n=document.getElementById('drawer'),b=document.getElementById('menuToggle');n.classList.toggle('open');b.setAttribute('aria-expanded',n.classList.contains('open'))}
