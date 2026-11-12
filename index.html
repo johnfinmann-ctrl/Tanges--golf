@@ -265,6 +265,79 @@ body{padding-bottom:calc(104px + env(safe-area-inset-bottom))}
  .rail-flag{right:56px!important;bottom:30px!important}
 }
 
+
+/* V12 - græsstrå og golfbold inspireret af Lyngbygaards reference, med Tanges egne farver */
+.global-golfball-rail{
+  position:fixed!important;left:0!important;right:0!important;top:auto!important;
+  bottom:calc(68px + env(safe-area-inset-bottom))!important;
+  width:100%!important;height:134px!important;z-index:29!important;
+  pointer-events:none;overflow:hidden;isolation:isolate;
+  transform:none!important;background:transparent!important;border:0!important
+}
+.global-golfball-rail:after{display:none!important}
+.global-golfball-rail .grass-base{
+  position:absolute;left:0!important;right:0!important;bottom:0!important;
+  height:112px!important;border-radius:0!important;box-shadow:none!important;
+  background:linear-gradient(to bottom,#d9eec8 0%,#b8dd91 34%,#64b546 72%,#398f31 100%)!important;
+  clip-path:polygon(0 28%, 13% 22%, 28% 26%, 47% 19%, 65% 25%, 84% 18%, 100% 23%,100% 100%,0 100%);
+}
+.global-golfball-rail .grass-cut,.global-golfball-rail .grass-fairway{display:none!important}
+.global-golfball-rail .grass-blades{
+  position:absolute;inset:0 0 0 0;z-index:2;
+  background-image:url('assets/grass-tange.svg');
+  background-size:100% 100%;background-repeat:no-repeat;
+}
+.global-golfball-rail .rail-hole{
+  right:clamp(34px,8vw,90px)!important;bottom:32px!important;
+  width:51px!important;height:19px!important;z-index:3!important;
+  border-radius:50%!important;
+  background:radial-gradient(ellipse,#031208 6%,#102b15 60%,#3c7038 100%)!important;
+  box-shadow:inset 0 3px 6px #000b,0 -1px 0 #b6dc9e!important
+}
+.global-golfball-rail .rail-flag{
+  right:clamp(45px,9vw,102px)!important;bottom:47px!important;z-index:3!important;
+  width:40px!important;height:57px!important
+}
+.global-golfball-rail .rail-flag-stick{height:49px!important}
+.global-golfball-rail .rail-flag-logo{width:27px!important;height:27px!important;left:8px!important;top:0!important}
+.global-golfball-rail .hole-pulse{right:clamp(26px,7.4vw,82px)!important;bottom:28px!important;z-index:3!important}
+.global-golfball-rail .global-golfball{
+  position:absolute;left:5px!important;bottom:37px!important;z-index:4!important;
+  width:80px!important;height:80px!important;border-radius:50%;
+  background:radial-gradient(circle at 26% 22%,#fff 0%,#fdfefd 27%,#e7eee5 70%,#bbc9b9 100%)!important;
+  border:1px solid #e5ebe2!important;
+  box-shadow:inset -9px -12px 17px #85978635,0 10px 14px #10261038!important;
+  will-change:transform,opacity;
+}
+.global-golfball-rail .global-golfball-shadow{
+  position:absolute;left:10px!important;bottom:30px!important;z-index:3!important;
+  width:77px!important;height:17px!important;
+  background:radial-gradient(ellipse,#15361d65 0%,#184a1a20 55%,transparent 78%)!important;
+  filter:blur(2px)!important;
+}
+.global-golfball .dimples{
+  inset:6px!important;opacity:.64!important;
+  background-image:radial-gradient(circle,#aebcad65 0 2px,transparent 2.8px)!important;
+  background-size:11px 10px!important;
+}
+.global-golfball .ball-mark{
+  font-size:9px!important;line-height:1.13!important;font-weight:850!important;
+  letter-spacing:.14px!important;color:#185d37!important;
+  top:52%!important;width:86%!important;
+  text-shadow:0 1px 1px #ffffffd1!important;
+}
+@media(min-width:680px){
+ .global-golfball-rail{height:176px!important;bottom:calc(75px + env(safe-area-inset-bottom))!important}
+ .global-golfball-rail .grass-base{height:139px!important}
+ .global-golfball-rail .global-golfball{width:113px!important;height:113px!important;bottom:37px!important}
+ .global-golfball-rail .global-golfball-shadow{width:111px!important;height:22px!important;bottom:27px!important}
+ .global-golfball .dimples{background-size:13px 12px!important}
+ .global-golfball .ball-mark{font-size:12.5px!important}
+ .global-golfball-rail .rail-hole{bottom:34px!important;width:63px!important;height:23px!important}
+ .global-golfball-rail .rail-flag{bottom:53px!important}
+}
+@media(prefers-reduced-motion:reduce){.global-golfball-rail .global-golfball,.global-golfball-rail .global-golfball-shadow{animation:none!important}}
+
 </style></head><body>
 <div aria-label="GolfStart Tange Sø – intro" class="curtain-intro" id="intro" role="dialog" aria-modal="true">
   <div class="curtain-scene" aria-hidden="true"><img src="assets/09.webp" alt=""/><div class="curtain-shade"></div></div>
@@ -321,7 +394,7 @@ body{padding-bottom:calc(104px + env(safe-area-inset-bottom))}
 <article class="person"><div class="person-mark">P</div><div class="person-body"><h3>Proshoppen</h3><div class="role">UDSTYR OG RÅDGIVNING</div><a href="tel:+4586659420">86 65 94 20 · tast 3</a><a href="mailto:proshop@tangegolf.dk">proshop@tangegolf.dk</a><p>Spørgsmål om køller og andet udstyr.</p></div></article>
 </div><div class="address-card"><h3>Find vej til klubben</h3><p>Tange Søvej 68, 8840 Rødkærsbro</p><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Tange+S%C3%B8vej+68+8840+R%C3%B8dk%C3%A6rsbro" rel="noopener" target="_blank">Start rutevejledning ↗</a></div><p class="smallnote">Kontaktoplysninger skal godkendes af Tange inden offentlig lancering.</p></section>
 <section class="app-page" id="naeste"><a class="page-back" href="#top">← Til forsiden</a><h2>Og når du har fået golfkørekortet?</h2><div class="card"><img alt="Luftfoto af golfklubbens bane og klubhus" src="assets/07.webp"/><div class="cardin"><h3>Golf er også fællesskab</h3><p>Nu starter golfrejsen for alvor. Lær GolfBox og Mit Golf at kende, find nye spillemakkere og deltag i klubbens aktiviteter.</p><a class="btn" href="https://tangegolf.dk/medlemskaber/" rel="noopener" target="_blank">Se medlemsmuligheder ↗</a></div></div></section></main>
-<footer class="footer"><div><strong>GOLFSTART TANGE SØ</strong><span> · Din vej ind i golfen</span></div><a href="https://tangegolf.dk/" rel="noopener" target="_blank">Besøg Tange Sø Golfklub ↗</a></footer><div class="global-golfball-rail" aria-hidden="true"><div class="grass-base"></div><div class="grass-cut"></div><div class="grass-fairway"></div><div class="rail-hole"></div><div class="hole-pulse"></div><div class="rail-flag"><div class="rail-flag-stick"></div><img alt="" class="rail-flag-logo" src="assets/00.webp"/></div><div class="global-golfball-shadow"></div><div class="global-golfball"><span class="dimples"></span><span class="ball-mark">Tange Sø<br/>Golf</span></div></div><nav aria-label="Genveje" class="bottomnav"><a href="#top"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="m3 10 9-7 9 7v10H3z"></path><path d="M9 20v-7h6v7"></path></svg><span>Velkommen</span></a><a href="#forloeb"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="6" cy="18" r="2"></circle><circle cx="18" cy="6" r="2"></circle><path d="M8 18h5a5 5 0 0 0 0-10h-2"></path></svg><span>Forløbet</span></a><a href="#oversigt"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><rect height="7" rx="1" width="7" x="3" y="3"></rect><rect height="7" rx="1" width="7" x="14" y="3"></rect><rect height="7" rx="1" width="7" x="3" y="14"></rect><rect height="7" rx="1" width="7" x="14" y="14"></rect></svg><span>Oversigt</span></a><a href="#faq"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4"></path><path d="M12 17h.01"></path></svg><span>FAQ</span></a><a href="#tilmelding"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="10" cy="8" r="3"></circle><path d="M3 20v-2a7 7 0 0 1 14 0v2"></path><path d="M18 8v6m-3-3h6"></path></svg><span>Tilmeld</span></a></nav>
+<footer class="footer"><div><strong>GOLFSTART TANGE SØ</strong><span> · Din vej ind i golfen</span></div><a href="https://tangegolf.dk/" rel="noopener" target="_blank">Besøg Tange Sø Golfklub ↗</a></footer><div class="global-golfball-rail" aria-hidden="true"><div class="grass-base"></div><div class="grass-cut"></div><div class="grass-fairway"></div><div class="grass-blades"></div><div class="rail-hole"></div><div class="hole-pulse"></div><div class="rail-flag"><div class="rail-flag-stick"></div><img alt="" class="rail-flag-logo" src="assets/00.webp"/></div><div class="global-golfball-shadow"></div><div class="global-golfball"><span class="dimples"></span><span class="ball-mark">Tange Sø<br/>Golf</span></div></div><nav aria-label="Genveje" class="bottomnav"><a href="#top"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="m3 10 9-7 9 7v10H3z"></path><path d="M9 20v-7h6v7"></path></svg><span>Velkommen</span></a><a href="#forloeb"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="6" cy="18" r="2"></circle><circle cx="18" cy="6" r="2"></circle><path d="M8 18h5a5 5 0 0 0 0-10h-2"></path></svg><span>Forløbet</span></a><a href="#oversigt"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><rect height="7" rx="1" width="7" x="3" y="3"></rect><rect height="7" rx="1" width="7" x="14" y="3"></rect><rect height="7" rx="1" width="7" x="3" y="14"></rect><rect height="7" rx="1" width="7" x="14" y="14"></rect></svg><span>Oversigt</span></a><a href="#faq"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4"></path><path d="M12 17h.01"></path></svg><span>FAQ</span></a><a href="#tilmelding"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="10" cy="8" r="3"></circle><path d="M3 20v-2a7 7 0 0 1 14 0v2"></path><path d="M18 8v6m-3-3h6"></path></svg><span>Tilmeld</span></a></nav>
 <script>
 let introFinishTimer;
 function finishIntro(){
@@ -366,81 +439,68 @@ go=function(id){location.hash='#'+id;showPage();};
 // V7: kun visuel animation. Den måler afstanden til hullet ved hver skærmstørrelse.
 (function initTangePutt(){
  const rail=document.querySelector('.global-golfball-rail');
- if(!rail) return;
+ if(!rail)return;
  const ball=rail.querySelector('.global-golfball');
  const shadow=rail.querySelector('.global-golfball-shadow');
  const hole=rail.querySelector('.rail-hole');
  const pulse=rail.querySelector('.hole-pulse');
  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
  let frame=0, start=0, lastCycle=-1, travel=0;
- const duration=11800, rollTime=8200, settleTime=1100, dropTime=620;
+ const duration=12600, rollTime=8900, settleTime=440, dropTime=570;
  function measure(){
-   ball.style.transform='translate(0px,0px) rotate(0deg) scale(1)';
-   const b=ball.getBoundingClientRect(), h=hole.getBoundingClientRect();
-   travel=(h.left+h.width/2)-(b.left+b.width/2)-2;
+   // Measured in the actual layout, so the ball stops over the hole on iPad and iPhone.
+   ball.style.transform='translate3d(0,0,0)';
+   const b=ball.getBoundingClientRect(),h=hole.getBoundingClientRect();
+   travel=(h.left+h.width/2)-(b.left+b.width/2);
  }
  function reset(){
-   ball.style.transform='translate(0px,0px) rotate(0deg) scale(1)';
-   ball.style.opacity='1';
-   shadow.style.transform='translateX(0px) scale(1)';
-   shadow.style.opacity='.24';
+   ball.style.transform='translate3d(0,0,0)';ball.style.opacity='1';
+   shadow.style.transform='translate3d(0,0,0)';shadow.style.opacity='.35';
    pulse.classList.remove('active');
  }
- function smooth(k){ return 0.5 - Math.cos(Math.PI*k)/2; }
  function tick(t){
    if(!start) start=t;
-   const elapsed=t-start;
-   const cycle=Math.floor(elapsed/duration);
-   const u=elapsed%duration;
-   if(cycle!==lastCycle){ lastCycle=cycle; measure(); reset(); }
-
+   const elapsed=t-start,cycle=Math.floor(elapsed/duration),u=elapsed%duration;
+   if(cycle!==lastCycle){lastCycle=cycle;measure();reset();}
    if(u<rollTime){
      const k=u/rollTime;
-     const eased=1-Math.pow(1-k,2.9); // mere glidende og tydelig afmatning mod hullet
-     const x=travel*eased;
-     const glide=Math.sin(k*Math.PI*0.96)*-0.55 + Math.sin(k*Math.PI*5.4)*0.12*(1-k);
-     const rot=(x/18.8)*57;
-     ball.style.transform=`translate(${x}px,${glide}px) rotate(${rot}deg) scale(1)`;
-     shadow.style.transform=`translateX(${x}px) scale(${1-0.03*k})`;
-     shadow.style.opacity=String(.24-.03*k);
-     ball.style.opacity='1';
-   } else if(u<rollTime+settleTime){
-     const p=(u-rollTime)/settleTime;
-     const ease=smooth(p);
-     const x=travel + Math.sin(p*Math.PI*2.2)*0.9*(1-p);
-     const y=Math.sin(p*Math.PI)*0.45;
-     const rot=((travel/18.8)*57)+(p*16);
-     ball.style.transform=`translate(${x}px,${y}px) rotate(${rot}deg) scale(${1-0.02*ease})`;
-     shadow.style.transform=`translateX(${travel}px) scale(${1-0.06*ease})`;
-     shadow.style.opacity=String(.21-.05*ease);
-   } else if(u<rollTime+settleTime+dropTime){
-     const p=(u-rollTime-settleTime)/dropTime;
-     const ease=1-Math.pow(1-p,3);
-     const x=travel + 1.5 + p*2.2;
-     const y=ease*10;
-     const rot=((travel/18.8)*57)+18;
-     const scale=1-(0.8*ease);
-     ball.style.transform=`translate(${x}px,${y}px) rotate(${rot}deg) scale(${scale})`;
-     ball.style.opacity=String(1-0.97*ease);
-     shadow.style.transform=`translateX(${travel+1}px) scale(${1-0.82*ease})`;
-     shadow.style.opacity=String(.16*(1-ease));
-     if(!pulse.classList.contains('active')) pulse.classList.add('active');
-   } else {
-     ball.style.opacity='0';
-     shadow.style.opacity='0';
-   }
+     // Golf ball starts with speed and gradually loses momentum from grass friction.
+     const pos=1-Math.pow(1-k,2.15);
+     const x=travel*pos;
+     const theta=x/(ball.offsetWidth/2)*180/Math.PI;
+     const y=-Math.sin(k*Math.PI)*.65;
+     ball.style.transform=`translate3d(${x}px,${y}px,0) rotate(${theta}deg)`;
+     shadow.style.transform=`translate3d(${x}px,0,0) scale(${1-.07*k})`;
+     ball.style.opacity='1';shadow.style.opacity=String(.35-.1*k);
+   }else if(u<rollTime+settleTime){
+     // Tiny residual roll on the cup rim, without the previous rubber-ball wobble.
+     const k=(u-rollTime)/settleTime;
+     const x=travel + Math.sin(k*Math.PI)*.7;
+     const theta=x/(ball.offsetWidth/2)*180/Math.PI;
+     ball.style.transform=`translate3d(${x}px,0,0) rotate(${theta}deg)`;
+     shadow.style.transform=`translate3d(${travel}px,0,0)`;
+     shadow.style.opacity='.25';
+   }else if(u<rollTime+settleTime+dropTime){
+     const k=(u-rollTime-settleTime)/dropTime;
+     const ease=k*k*(3-2*k);
+     const theta=travel/(ball.offsetWidth/2)*180/Math.PI;
+     ball.style.transform=`translate3d(${travel}px,${ease*36}px,0) rotate(${theta+12*k}deg) scale(${1-.85*ease})`;
+     ball.style.opacity=String(1-ease);
+     shadow.style.transform=`translate3d(${travel}px,0,0) scale(${1-.8*ease})`;
+     shadow.style.opacity=String(.25*(1-ease));
+     if(k>.6&&!pulse.classList.contains('active'))pulse.classList.add('active');
+   }else{ball.style.opacity='0';shadow.style.opacity='0';}
    frame=requestAnimationFrame(tick);
  }
- function startAnimation(){
-   cancelAnimationFrame(frame);
-   start=0; lastCycle=-1; reset();
-   if(reduced.matches){ measure(); ball.style.opacity='0'; shadow.style.opacity='0'; return; }
-   if(!document.hidden) frame=requestAnimationFrame(tick);
+ function restart(){
+   cancelAnimationFrame(frame);start=0;lastCycle=-1;reset();
+   if(reduced.matches){ball.style.opacity='0';shadow.style.opacity='0';return;}
+   if(!document.hidden)frame=requestAnimationFrame(tick);
  }
- document.addEventListener('visibilitychange',startAnimation);
- window.addEventListener('resize',startAnimation);
- if(reduced.addEventListener) reduced.addEventListener('change',startAnimation);
- startAnimation();
+ document.addEventListener('visibilitychange',restart);
+ window.addEventListener('resize',restart);
+ if(reduced.addEventListener)reduced.addEventListener('change',restart);
+ restart();
 })();
 
 
