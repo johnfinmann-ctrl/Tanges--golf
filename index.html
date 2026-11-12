@@ -215,11 +215,11 @@ body{padding-bottom:calc(104px + env(safe-area-inset-bottom))}
 .curtain-fabric:after{content:'';position:absolute;top:0;bottom:0;left:-4px;width:11px;background:linear-gradient(90deg,#b89844,#e1c471,#a47f28)}
 .fabric-title{text-align:center;font-size:clamp(28px,8vw,54px);letter-spacing:.14em;font-weight:900;line-height:1.45;color:#f6f0de}
 .fabric-title em{font-style:normal;color:#d4b65d;font-size:.56em;letter-spacing:.27em}
-.curtain-ball{position:absolute;z-index:5;left:0;top:50%;width:clamp(43px,6vw,65px);height:clamp(43px,6vw,65px);margin-top:-26px;border-radius:50%;border:1px solid #e3e4dd;background:radial-gradient(circle at 30% 25%,#fff 0%,#f8f8f4 50%,#ccd3cb 100%);box-shadow:0 7px 20px #0007;display:grid;place-items:center;animation:curtainRoll 4.8s cubic-bezier(.45,.04,.23,1) forwards}
-.curtain-ball span{font-size:5px;line-height:1.15;letter-spacing:.14px;font-weight:900;color:#145439;text-align:center}
+.curtain-ball{position:absolute;z-index:5;left:0;top:50%;width:clamp(118px,18vw,182px);height:clamp(118px,18vw,182px);margin-top:-64px;border-radius:50%;border:1px solid #e3e4dd;background:radial-gradient(circle at 30% 25%,#fff 0%,#fbfbf8 38%,#eef1eb 68%,#cfd6ce 100%);box-shadow:0 10px 26px #0007, inset -6px -8px 10px #8c9f8c24;display:grid;place-items:center;animation:curtainRoll 4.8s cubic-bezier(.45,.04,.23,1) forwards}
+.curtain-ball span{font-size:10px;line-height:1.06;letter-spacing:.2px;font-weight:900;color:#145439;text-align:center;text-transform:uppercase}
 .curtain-skip{position:absolute;z-index:8;right:max(14px,env(safe-area-inset-right));top:max(18px,env(safe-area-inset-top));background:#113f30ee;color:#fff;border:1px solid #c8ab60;border-radius:999px;padding:10px 14px;font-size:13px}
 @keyframes pullCurtain{0%,10%{transform:translateX(0)}87%,100%{transform:translateX(105%)}}
-@keyframes curtainRoll{0%,10%{transform:translateX(-100%) rotate(0deg);opacity:1}87%{transform:translateX(calc(100vw - 10px)) rotate(1020deg);opacity:1}100%{transform:translateX(calc(100vw + 75px)) rotate(1090deg);opacity:0}}
+@keyframes curtainRoll{0%,10%{transform:translateX(-130%) rotate(0deg);opacity:1}87%{transform:translateX(calc(100vw - 24px)) rotate(1020deg);opacity:1}100%{transform:translateX(calc(100vw + 120px)) rotate(1090deg);opacity:0}}
 @keyframes curtainCopy{0%,35%{opacity:0;transform:translateY(12px)}65%,100%{opacity:1;transform:translateY(0)}}
 @keyframes curtainKen{from{transform:scale(1.06)}to{transform:scale(1)}}
 .welcome-trigger{display:inline-flex;align-items:center;gap:11px;margin:14px 0 0 12px;background:#153b2bdc;border:1px solid #d6bd76;border-radius:999px;color:#fff;padding:5px 12px 5px 5px;vertical-align:middle;box-shadow:0 8px 25px #0004;cursor:pointer;text-align:left}
@@ -238,6 +238,8 @@ body{padding-bottom:calc(104px + env(safe-area-inset-bottom))}
 .welcome-panel-body .welcome-note{font-size:12px;color:#66786b}
 .welcome-close{position:absolute;right:12px;top:12px;width:42px;height:42px;border:1px solid #ddc88c;border-radius:50%;color:#fff;background:#143d2fed;font-size:29px;line-height:1}
 @media(max-width:600px){.hero-body .welcome-trigger{display:flex;width:max-content;margin:11px 0 0}.hero{min-height:380px}}
+
+@media(max-width:600px){.curtain-ball{width:132px;height:132px;margin-top:-66px}.curtain-ball span{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.curtain-fabric,.curtain-ball,.curtain-copy,.curtain-scene img{animation:none!important}.curtain-fabric{display:none}.curtain-copy{opacity:1}}
 
 /* V11 – bundanimation tættere på Lyngbygaard: større bold, grønnere græs, roligere flow */
